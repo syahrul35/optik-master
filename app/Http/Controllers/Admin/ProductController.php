@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\{Product, Category};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Exports\ProductExport;
+use App\Imports\ProductImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -121,5 +124,31 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('products.index')
             ->with('success', 'Produk berhasil dihapus.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProductExport, 'products_' . now()->format('Y-m-d_H-i-s') . '.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:2048',
+        ]);
+
+        $import = new ProductImport;
+        Excel::import($import, $request->file('file'));
+
+        $successCount = $import->getSuccessCount();
+        $errors = $import->getErrors();
+
+        $message = "Import selesai. {$successCount} data berhasil diimpor.";
+        if (!empty($errors)) {
+            $message .= " Tapi ada " . count($errors) . " error(s): " . implode('; ', $errors);
+        }
+
+        return redirect()->route('products.index')
+            ->with('success', $message);
     }
 }

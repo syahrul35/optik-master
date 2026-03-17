@@ -17,6 +17,14 @@
                 <i class="bi bi-plus-lg me-1"></i>Tambah Pasien
             </a>
             @endcan
+            @can('patient.view')
+            <a href="{{ route('patients.export') }}" class="btn btn-sm btn-success">
+                <i class="bi bi-download me-1"></i>Export Excel
+            </a>
+            <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#importModal">
+                <i class="bi bi-upload me-1"></i>Import Excel
+            </button>
+            @endcan
         </div>
     </div>
     <div class="table-responsive">
@@ -97,4 +105,32 @@
 @push('styles')
 <style>.btn-xs { padding: 3px 8px; font-size: .75rem; }</style>
 @endpush
+
+<!-- Modal Import -->
+<div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="importModalLabel">Import Data Pasien</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('patients.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Pilih File Excel (.xlsx, .xls, .csv)</label>
+                        <input type="file" class="form-control" id="file" name="file" accept=".xlsx,.xls,.csv" required>
+                        <div class="form-text">
+                        <a href="/template.xlsx">download template</a>    
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Import</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection

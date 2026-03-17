@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Patient;
+use App\Exports\PatientExport;
+use App\Imports\PatientImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PatientController extends Controller
 {
@@ -91,6 +94,32 @@ class PatientController extends Controller
 
         return redirect()->route('patients.index')
             ->with('success', 'Data pasien berhasil dihapus.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new PatientExport, 'patients_' . now()->format('Y-m-d_H-i-s') . '.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:2048',
+        ]);
+
+        $import = new PatientImport;
+        Excel::import($import, $request->file('file'));
+
+        $successCount = $import->getSuccessCount();
+        $errors = $import->getErrors();
+
+        $message = "Import selesai. {$successCount} data berhasil diimpor.";
+        if (!empty($errors)) {
+            $message .= " Tapi ada " . count($errors) . " error(s): " . implode('; ', $errors);
+        }
+
+        return redirect()->route('patients.index')
+            ->with('success', $message);
     }
 
     // AJAX — search pasien untuk POS

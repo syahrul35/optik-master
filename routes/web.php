@@ -21,6 +21,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['permission:patient.view'])->group(function () {
         Route::resource('patients', PatientController::class);
         Route::get('patients/search/json', [PatientController::class, 'search'])->name('patients.search');
+        Route::get('patients/export/excel', [PatientController::class, 'export'])->name('patients.export');
+        Route::post('patients/import-excel', [PatientController::class, 'import'])->name('patients.import');
     });
 
     Route::middleware(['permission:medical_record.view'])->group(function () {
@@ -30,6 +32,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['permission:product.view'])->group(function () {
         Route::resource('categories', CategoryController::class);
         Route::resource('products', ProductController::class);
+        Route::get('products/export/excel', [ProductController::class, 'export'])->name('products.export');
+        Route::post('products/import-excel', [ProductController::class, 'import'])->name('products.import');
     });
 
     Route::middleware(['permission:transaction.view'])->group(function () {
