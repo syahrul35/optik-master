@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login — Optik Store</title>
+    <title>Login — Optik Perkasa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
@@ -45,7 +45,7 @@
     <div class="login-card">
         <div class="login-header">
             <div class="logo-icon"><i class="bi bi-eyeglasses"></i></div>
-            <h4>Optik Store</h4>
+            <h4>Optik Perkasa</h4>
             <p>Sistem Manajemen Optik</p>
         </div>
         <div class="login-body">
@@ -98,7 +98,7 @@
 
             <div class="text-center mt-4 text-muted small">
                 <i class="bi bi-shield-lock me-1"></i>
-                Akses terbatas untuk staff Optik Store
+                Akses terbatas untuk staff Optik Perkasa
             </div>
         </div>
     </div>

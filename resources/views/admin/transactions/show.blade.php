@@ -10,7 +10,7 @@
     <div class="card-body p-4">
         {{-- Header Struk --}}
         <div class="text-center mb-4">
-            <h5 class="fw-bold mb-0">OPTIK STORE</h5>
+            <h5 class="fw-bold mb-0">Optik Perkasa</h5>
             <div class="text-muted small">Jl. Contoh No. 1, Surabaya</div>
             <div class="text-muted small">Telp: 031-xxxxxxx</div>
             <hr>
@@ -84,7 +84,7 @@
         </table>
 
         <div class="text-center mt-3 text-muted small">
-            <i class="bi bi-heart-fill text-danger"></i> Terima kasih telah berbelanja di Optik Store
+            <i class="bi bi-heart-fill text-danger"></i> Terima kasih telah berbelanja di Optik Perkasa
         </div>
     </div>
 </div>

@@ -3,7 +3,7 @@ set -e
 
 cd /var/www/optik
 
-echo "=== Starting Optik Store ==="
+echo "=== Starting Optik Perkasa ==="
 
 # Tunggu MySQL siap
 echo "Waiting for database..."
@@ -42,7 +42,7 @@ chown -R www-data:www-data /var/www/optik/storage
 chown -R www-data:www-data /var/www/optik/bootstrap/cache
 mkdir -p /var/log/supervisor
 
-echo "=== Optik Store Ready! ==="
+echo "=== Optik Perkasa Ready! ==="
 
 # Jalankan Supervisor (Nginx + PHP-FPM)
 exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
